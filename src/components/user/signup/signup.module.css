@@ -23,8 +23,10 @@
   }
   
   .logo {
-    display: block;
-    margin: 0 auto;
+    color: #00BFA6;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
   }
   
   .input {

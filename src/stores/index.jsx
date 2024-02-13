@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "@/stores/user/user.sliec.jsx";
+import  userInfoSlice  from '@/stores/userInfo/userInfo.sliec.jsx';
 
 // 스토어 생성
 const store = configureStore({
     reducer: {
-      user: userSlice
+      user: userSlice,
+      userInfo:  userInfoSlice 
     }
 });
 

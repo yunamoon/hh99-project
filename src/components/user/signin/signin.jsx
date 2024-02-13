@@ -35,12 +35,7 @@ function Signin({ open, onClose }) {
     <div className={`${styles.modal} ${open ? styles.open : ''}`} onClick={onClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <form>
-          <img
-            className={styles.logo}
-            src='https://image-cdn.hypb.st/https%3A%2F%2Fkr.hypebeast.com%2Ffiles%2F2021%2F01%2Fkia-motors-new-logo-brand-slogan-officially-revealed-01.jpg?cbr=1&q=90'
-            alt='logo'
-            width={100}
-            height={80} />
+        <h1 className={styles.logo}>항해99</h1>
           <input
             className={styles.input}
             placeholder='이메일을 입력해주세요.'
@@ -61,7 +56,7 @@ function Signin({ open, onClose }) {
             className={styles.button}
             type='submit'
             onClick={signin}
-          > Sign In</button>
+          > 로그인</button>
         </form>
       </div>
     </div>

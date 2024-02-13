@@ -1,0 +1,61 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color:  #00BFA6;;
+  }
+
+  .container h2 {
+    text-align: center;
+  }
+  
+  .formContainer {
+    border: 1px solid #00BFA6;
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formGroup {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    padding: 10px 0px;
+    width: 100%;
+    border: 1px solid #00BFA6;
+    border-radius: 5px;
+    margin-top: 5px; /* 각 입력 요소의 위 아래 마진을 추가합니다. */
+  }
+  
+  textarea {
+    resize: vertical; /* 텍스트 영역이 수직으로만 조절되도록 설정합니다. */
+  }
+  
+  button {
+    background-color: #00BFA6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #009688;
+  }
+  

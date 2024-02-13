@@ -51,9 +51,9 @@ function Signup({ open, onClose }) {
               // 업로드 완료 후
               storage.ref("images").child(authUser.user.uid).getDownloadURL().then(url => {
                 // Firestore에 사용자 정보 추가
-                db.collection("users").doc(authUser.user.displayName).set({
+                db.collection("users").doc(authUser.user.uid).set({
                   id : authUser.user.uid,
-                  nickname : displayName,
+                  displayName : displayName,
                   email: email,
                   password : password,
                   photoURL: url, // 업로드한 이미지의 URL 저장
@@ -96,13 +96,7 @@ function Signup({ open, onClose }) {
     <div className={`${styles.modal} ${open ? styles.open : ''}`} onClick={handleCloseModal}>
       <div className={styles.modalContent}>
         <form>
-          <img
-            className={styles.logo}
-            src='https://image-cdn.hypb.st/https%3A%2F%2Fkr.hypebeast.com%2Ffiles%2F2021%2F01%2Fkia-motors-new-logo-brand-slogan-officially-revealed-01.jpg?cbr=1&q=90'
-            alt='logo'
-            width={100}
-            height={80}
-          />
+        <h1 className={styles.logo}>항해99</h1>
              {/* 미리보기 이미지 */}
              {previewImage && (
             <img
@@ -149,7 +143,7 @@ function Signup({ open, onClose }) {
             className={styles.button}
             type='submit'
             onClick={signup}
-          > Sign Up</button>
+          > 회원가입</button>
         </form>
       </div>
     </div>

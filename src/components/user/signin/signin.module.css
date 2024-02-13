@@ -1,31 +1,33 @@
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-  
-  .open {
-    display: block;
-  }
-  
-  .modalContent {
-    background-color: white;
-    margin: 15% auto;
-    padding: 30px;
-    border: 1px solid #00BFA6;
-    width: 35%;
-  }
-  
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.open {
+  display: block;
+}
+
+.modalContent {
+  background-color: white;
+  margin: 15% auto;
+  padding: 30px 30px 40px 30px;
+  border: 1px solid #00BFA6;
+  width: 35%;
+}
   .logo {
-    display: block;
-    margin: 0 auto;
+    color: #00BFA6;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
   }
+  
   
   .input {
     width: calc(100% - 20px);

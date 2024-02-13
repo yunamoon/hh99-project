@@ -1,11 +1,11 @@
 import { Button, TextField } from '@material-ui/core'
 import React, { useState } from 'react'
-import styles from './Register.module.css';
+import { db, storage } from '@/firebase';
+import styles from '@/pages/RegisterPage/Register.module.css';
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import 'firebase/compat/storage'
 import 'firebase/compat/firestore'
-import { db, storage } from '../../firebase';
 
 const Register = ({ username }) => {
   

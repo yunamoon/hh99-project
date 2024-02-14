@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUser } from '@/stores/user/user.sliec.jsx';
 import { auth } from '@/firebase';
-import styles from './Signin.module.css';
+import styles from '@/components/user/user.module.css'; 
 
 function Signin({ open, onClose }) {
   const dispatch = useDispatch();

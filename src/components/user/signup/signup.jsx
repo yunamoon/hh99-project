@@ -3,9 +3,7 @@ import { auth, db, storage} from '@/firebase';
 import { useDispatch } from 'react-redux';
 import { setUser } from '@/stores/user/user.sliec.jsx';
 import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore'; // storage 추가
-import styles from '@/components/user/signup/signup.module.css'; // CSS 모듈을 가져옵니다.
+import styles from '@/components/user/user.module.css'; 
 
 function Signup({ open, onClose }) {
   const dispatch = useDispatch();

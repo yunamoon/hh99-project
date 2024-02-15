@@ -7,8 +7,9 @@ import Home from '@/pages/HomePage/index';
 import NotFound from '@/pages/NotFoundPage/index.jsx'
 import MyPage from '@/pages/MyPage/index';
 import LandigPage from '@/pages/LandigPage/index';
-import PostPage from './pages/PostPage';
-PostPage
+import PostPage from '@/pages/PostPage';
+import RegisterPage from '@/pages/RegisterPage/index.jsx';
+
 function App() {
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
   return (
@@ -21,12 +22,12 @@ function App() {
         <Route path="/users" element={<UserListPage/>} />
         <Route path="/mypage" element={<MyPage/>} />
         <Route path="/post" element={<PostPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="*" element={<NotFound />} />
         </Routes>
       ) : (
         <Routes>
-        <Route path="/" element={<LandigPage />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<LandigPage />} />
         </Routes>
       )}
 

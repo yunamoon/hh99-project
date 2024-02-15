@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import { auth, db, storage} from '@/firebase'; 
 import { useDispatch } from 'react-redux';
 import { setUser } from '@/stores/user/user.sliec.jsx';
-import firebase from 'firebase/compat/app';
 import styles from '@/components/user/user.module.css'; 
 
 function Signup({ open, onClose }) {
+  
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [bio, setBio] = useState('');
   const [profileImage, setProfileImage] = useState(null); // 프로필 이미지 상태 추가
   const [previewImage, setPreviewImage] = useState(null); // 미리보기 이미지 상태 추가
 
@@ -27,91 +30,91 @@ function Signup({ open, onClose }) {
 
   const signup = (e) => {
     e.preventDefault();
-
-    // 이메일/비밀번호로 사용자 생성
+  
     auth.createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
         return authUser.user.updateProfile({
           displayName: displayName,
-          profileImage : profileImage
-        })
-      .then(() => {
-          // Firebase Storage에 프로필 이미지 업로드
-          const uploadTask = storage.ref(`images/${authUser.user.uid}`).put(profileImage);
-          uploadTask.on(
-            "state_changed",
-            snapshot => {},
-            error => {
-              // 업로드 중 오류 처리
-              console.error(error);
-            },
-            () => {
-              // 업로드 완료 후
-              storage.ref("images").child(authUser.user.uid).getDownloadURL().then(url => {
-                // Firestore에 사용자 정보 추가
-                db.collection("users").doc(authUser.user.uid).set({
-                  id : authUser.user.uid,
-                  displayName : displayName,
-                  email: email,
-                  password : password,
-                  photoURL: url, // 업로드한 이미지의 URL 저장
-                  createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                  updatedAt: firebase.firestore.FieldValue.serverTimestamp() 
-                });
-              });
-            }
-          );
-          auth.signInWithEmailAndPassword(email, password)
-          .then((userCredential) => {
-            const user = userCredential.user;
-            dispatch(
-              setUser({
-                email: userCredential.user.email,
-                token: userCredential.user.refreshToken,
-                id: userCredential.user.uid,
-                displayName: userCredential.user.displayName,
-                profileUrl : userCredential.user.profileUrl
-              })
+        }).then(() => {
+          const user = authUser.user;
+          if (profileImage) {
+            const uploadImage = storage.ref(`images/${user.uid}`).put(profileImage);
+            uploadImage.on(
+              "state_changed",
+              (snapshot) => {},
+              (error) => {
+                console.error(error);
+              },
+              () => {
+                storage
+                  .ref("images")
+                  .child(user.uid)
+                  .getDownloadURL()
+                  .then((url) => {
+                    db.collection("users").doc(user.uid).set({
+                      id: user.uid,
+                      email: user.email,
+                      displayName: displayName,
+                      password: password, // 이 부분을 보안상 고려해 수정하는 것이 좋습니다.
+                      photoURL: url,
+                      bio: bio,
+                      createdAt: Date(), 
+                      updatedAt: Date(), 
+                    });
+                  });
+              }
             );
-          })
-          onClose(); // 모달을 닫습니다.
+          }
+          auth.signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+              const user = userCredential.user;
+              dispatch(
+                setUser({
+                  id: user.uid,
+                  email: user.email,
+                  token: user.refreshToken,
+                  displayName: user.displayName,
+                })
+              );
+            })
+            .catch((error) => {
+              console.error(error);
+              alert(error.message);
+            });
+          onClose();
+          navigate('/');
         });
       })
       .catch((error) => {
-        // 사용자 생성 중 오류 처리
         console.error(error);
         alert(error.message);
       });
   };
-
+  
   const handleCloseModal = (e) => {
     if (e.target === e.currentTarget) {
-      onClose(); // 모달을 닫습니다.
+      onClose(); 
     }
   };
 
   return (
     <div className={`${styles.modal} ${open ? styles.open : ''}`} onClick={handleCloseModal}>
       <div className={styles.modalContent}>
-        <form>
+        <form className={styles.form}>
         <h1 className={styles.logo}>항해99</h1>
-             {/* 미리보기 이미지 */}
              {previewImage && (
             <img
               className={styles.previewImage}
               src={previewImage}
               alt='preview'
             />
-          )}
-           {/* 프로필 이미지 업로드 input */}
+             )}
            <input
             className={styles.input}
             type='file'
             accept='image/*'
             onChange={handleImageChange}
           />
-       
-          <br />
           <input
             className={styles.input}
             placeholder='이름을 입력해주세요.'
@@ -119,7 +122,6 @@ function Signup({ open, onClose }) {
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
           />
-          <br />
           <input
             className={styles.input}
             placeholder='이메일을 입력해주세요.'
@@ -127,7 +129,6 @@ function Signup({ open, onClose }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <br />
           <input
             className={styles.input}
             placeholder='비밀번호를 입력해주세요.'
@@ -135,13 +136,18 @@ function Signup({ open, onClose }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <br />
-         
+
+          <textarea
+            className={styles.input}
+            placeholder='자기소개를 입력해주세요.'
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+          />
           <button
             className={styles.button}
             type='submit'
-            onClick={signup}
-          > 회원가입</button>
+            onClick={signup}> 
+            회원가입</button>
         </form>
       </div>
     </div>

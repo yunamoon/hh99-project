@@ -4,12 +4,13 @@ const initialState =
 localStorage.getItem('userInfo') ?
 JSON.parse(localStorage.getItem('userInfo')) : 
 { 
-  id: "" ,
-  email: "",  
-  displayName: "", 
-  photoURL : "",
-  bio : "",
-updatedAt: "",
+    id: "" ,
+    email: "", 
+    displayName: "", 
+    photoURL : "",
+    bio : "",
+    createdAt : "",
+    updatedAt : "",
 }
 
 export const userInfoSlice = createSlice({
@@ -22,6 +23,7 @@ export const userInfoSlice = createSlice({
             state.displayName = action.payload.displayName; 
             state.photoURL= action.payload.photoURL;
             state.bio = action.payload.bio;
+            state.createdAt = action.payload.createdAt,
             state.updatedAt = action.payload.updatedAt,
             localStorage.setItem('userinfo', JSON.stringify(state));
         },
@@ -31,8 +33,8 @@ export const userInfoSlice = createSlice({
             state.displayName = "";
             state.photoURL = "";
             state.bio = "";
+            state.createdAt = "",
             state.updatedAt = "";
-
             localStorage.removeItem('userinfo');
         }
     }

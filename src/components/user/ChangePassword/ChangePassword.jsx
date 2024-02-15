@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
+import {auth} from '@/firebase'; 
 import styles from '@/components/user/user.module.css'; 
+import { EmailAuthProvider } from 'firebase/auth';
 
 const ChangePassword = ({ open, onClose }) => {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -18,21 +18,25 @@ const ChangePassword = ({ open, onClose }) => {
     }
 
     try {
-      const user = firebase.auth().currentUser;
-      const credential = firebase.auth.EmailAuthProvider.credential(
+      const user = auth.currentUser;
+      const credential = EmailAuthProvider.credential(
         user.email,
         currentPassword
       );
+
       await user.reauthenticateWithCredential(credential);
       await user.updatePassword(newPassword);
+
       setError(null);
       setCurrentPassword('');
       setNewPassword('');
       setConfirmPassword('');
+
       console.log('비밀번호가 성공적으로 변경되었습니다.');
+      onClose();
     } catch (error) {
-      setError('비밀번호를 변경하는 중 오류가 발생했습니다.');
-      console.error('비밀번호 변경 오류:', error);
+      setError('현재 비밀번호가 일치하지 않습니다.');
+      console.error('재인증 오류:', error);
     }
   };
 
@@ -44,6 +48,7 @@ const ChangePassword = ({ open, onClose }) => {
       <div>
         <label>현재 비밀번호</label>
         <input
+          className={styles.input}
           type="password"
           value={currentPassword}
           onChange={(e) => setCurrentPassword(e.target.value)}

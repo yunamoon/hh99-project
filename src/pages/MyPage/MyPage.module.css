@@ -34,19 +34,21 @@
     margin-bottom: 5px;
   }
   
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  textarea {
+  .input {
     margin: 0px;
     padding: 10px 0px;
     width: 100%;
     border: 1px solid rgb(255, 255, 255);
     border-radius: 5px;
   }
-  
+
   textarea {
     resize: vertical;
+  }
+
+  .buttonContainer {
+    display: flex;
+    justify-content: space-between;
   }
   
   .button {
@@ -55,7 +57,7 @@
     border: none;
     padding: 15px 20px;
     border-radius: 5px;
-    width: 100%;
+    width: 49%;
     cursor: pointer;
   }
   

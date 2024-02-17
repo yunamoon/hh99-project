@@ -13,10 +13,14 @@ const HomePage = () => {
          누적된 ❤️ : <strong>150</strong></p>
       <div className={styles.buttons}>
       <Link to="/users">
-      <button className={styles.button}  >다른 회원 둘러보기</button></Link>
+      <button className={styles.button}  >다른 회원 둘러보기</button>
+      </Link>
+      <Link to="/mypage">
         <button className={styles.button} >마이 페이지</button>
+      </Link>
+      <Link to="/register">
         <button className={styles.button} >포스트 쓰기</button>
-        
+      </Link>
       </div>
     </div>
   )

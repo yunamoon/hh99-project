@@ -43,6 +43,7 @@ const MyPage = () => {
           email: userData.email,
           displayName: userData.displayName,
           photoURL: userData.photoURL,
+          createdAt: userData.createdAt,
           bio: userData.bio,
           updatedAt: Date(),
         });

@@ -15,6 +15,7 @@ function logout() {
     fontWeight: 'bold',
     cursor: 'pointer',
     transition: 'color 0.3s ease',
+    padding : '10px'
   };
 
   const handleLogout = () => {

@@ -143,7 +143,7 @@ function UserListPage() {
                               팔로우
                           </button>
                           <button 
-                              className={styles.unfollowButton} 
+                              className={styles.followButton}  
                               onClick={() => handleUnfollowClick(currentUser.uid, user.id)}
                           >
                               언팔로우

@@ -1,38 +1,28 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import Header from '@/components/header/header';
-import UserListPage from '@/pages/UserListPage';
-import Home from '@/pages/HomePage/index';
-import NotFound from '@/pages/NotFoundPage/index.jsx'
+import React from "react";
+import { BrowserRouter , Route, Routes, Navigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/firebase/firebase";
+// Home , Auth, layout , mypage
+import PageLayout from "@/Layouts/PageLayout.jsx";
+import HomePage from '@/pages/HomePage/index';
 import MyPage from '@/pages/MyPage/index';
-import LandigPage from '@/pages/LandigPage/index';
-import PostPage from '@/pages/PostPage';
-import RegisterPage from '@/pages/RegisterPage/index.jsx';
+import AuthPage from '@/pages/AuthPage/index';
 
 function App() {
-  const isAuthenticated = useSelector(state => state.user.isAuthenticated);
+  const [authUser] = useAuthState(auth);
+
   return (
-    <BrowserRouter>
-    <Header />
-
-      {isAuthenticated == true? (
-        <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/users" element={<UserListPage/>} />
-        <Route path="/mypage" element={<MyPage/>} />
-        <Route path="/post" element={<PostPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="*" element={<NotFound />} />
-        </Routes>
-      ) : (
-        <Routes>
-        <Route path="*" element={<LandigPage />} />
-        </Routes>
-      )}
-
-
+    <BrowserRouter >
+    <PageLayout>
+      <Routes>
+        <Route path='/auth' element={!authUser ? <AuthPage /> : <Navigate to='/' />} />
+        <Route path='/' element={authUser ? <HomePage /> : <Navigate to='/auth' />} />
+        <Route path='/create' element={authUser ? <HomePage /> : <Navigate to='/auth' />} />
+				<Route path='/:username' element={<MyPage />} />
+      </Routes>
+    </PageLayout>
   </BrowserRouter>
+
   
   )
 }

@@ -5,6 +5,7 @@ import 'firebase/compat/storage'
 import 'firebase/compat/firestore'
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth ,updateProfile} from 'firebase/auth';
+
 const firebaseConfig = {
   apiKey: "AIzaSyBHYIIJIqE92oOcviqf92Zro5PqDmoKgew",
   authDomain: "hh99-ac7ee.firebaseapp.com",

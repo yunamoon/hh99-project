@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { auth, db} from '@/firebase'
+import { auth, db} from '@/firebase/firebase'
 import { useDispatch } from 'react-redux';
 import { setUser } from '@/store/user.sliec.jsx';
 

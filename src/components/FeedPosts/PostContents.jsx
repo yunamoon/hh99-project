@@ -2,12 +2,11 @@ import React from 'react';
 import { useRef, useState } from "react";
 import userSlice from '../../store/user.sliec'; // 사용자 슬라이스 가져오기
 import { timeAgo } from "@/utils/timeAgo"; // timeAgo 유틸리티 가져오기
-
-import CommentsModal from "../Modals/CommentsModal"; // 댓글 모달 컴포넌트 가져오기
+import CommentsModal from "@/components/Comments/CommentsModal.jsx"; // 댓글 모달 컴포넌트 가져오기
 import useLike from "@/hooks/useLike"; // 좋아요 훅 가져오기
 import useComment from "@/hooks/useComment"; // 댓글 훅 가져오기
 
-const PostFooter = ({ post, isProfilePage, creatorProfile }) => {
+const PostContents = ({ post, isProfilePage, creatorProfile }) => {
    
     const { isCommenting, handlePostComment } = useComment(); // 댓글 작성 훅 사용
     const [comment, setComment] = useState(""); // 댓글 상태 관리
@@ -92,4 +91,4 @@ const PostFooter = ({ post, isProfilePage, creatorProfile }) => {
     );
 };
 
-export default PostFooter;
+export default PostContents;

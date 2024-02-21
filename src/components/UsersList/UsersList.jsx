@@ -1,52 +1,38 @@
-import React from 'react'
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react'
 import useFollower from "@/hooks/useFollower";
+import UseGetUsers from '@/hooks/useGetUsers';
+import UserListItem from '@/components/UsersList/UsersListItem.jsx';
 
+const UserList = () => {
+    const {  Users } = UseGetUsers();
+    const [searchTerm, setSearchTerm] = useState('');
 
-const UserList = ({ user, setUser }) => {
-    
-    const { isFollowing, isUpdating, handleFollowUser } = useFollower(user.uid);
-    const dispatch = useDispatch();
-    const authUser = useSelector(state => state.user);
+    // 검색어에 따라 유저 목록을 필터링
+    const filteredUsers = Users.filter(user => {
+        return user.username.toLowerCase().includes(searchTerm.toLowerCase());
+    });
 
-    const onFollowUser = async () => {
-        await handleFollowUser();
-
-        dispatch(
-            setUser({
-                ...user,
-                followers: isFollowing
-                    ? user.followers.filter((follower) => follower.uid !== authUser.uid)
-                    : [...user.followers, authUser],
-            })
-          );
+    // 검색어 입력 시 상태 업데이트
+    const handleSearchInputChange = (event) => {
+        setSearchTerm(event.target.value);
     };
 
+
     return (
-        <div className="flex justify-between items-center w-full">
-            <div className="flex items-center space-x-2">
-                <Link to={`/${user.username}`}>
-                    <img src={user.profilePicURL} alt='p' className="w-10 h-10 rounded-full" />
-                </Link>
-                <div className="flex flex-col">
-                    <Link to={`/${user.username}`}>
-                        <p className="text-sm font-semibold">{user.username}</p>
-                    </Link>
-                    <p className="text-xs text-gray-500">{user.followers.length} followers</p>
-                </div>
-            </div>
-            {authUser.uid !== user.uid && (
-                <button
-                    className={`text-sm font-medium ${
-                        isFollowing ? "text-blue-400" : "text-gray-500 hover:text-blue-400"
-                    }`}
-                    onClick={onFollowUser}
-                    disabled={isUpdating}
-                >
-                    {isFollowing ? "Unfollow" : "Follow"}
-                </button>
-            )}
+        <div>
+            {/* 검색 상자 */}
+            <input
+                type="text"
+                placeholder="Search users..."
+                value={searchTerm}
+                onChange={handleSearchInputChange}
+                className="px-3 py-3 rounded-md  w-full mx-10 mt-10 shadow-md"
+            />
+            
+            {/* 필터링된 유저 목록 렌더링 */}
+            {filteredUsers.map((user) => (
+                <UserListItem user={user} key={user.id} />
+            ))}
         </div>
     );
 };

@@ -10,7 +10,7 @@ const useCreateComment = () => {
 
     const handlePostComment = async (postId, comment) => {
         if (isCommenting) return;
-        if (!authUser) return showToast("Error", "You must be logged in to comment", "error");
+        if (!authUser) return;
         setIsCommenting(true);
      
         const newComment = {
@@ -26,7 +26,8 @@ const useCreateComment = () => {
             });
             addComment({ postId, comment: newComment }); // 수정된 부분
         } catch (error) {
-            showToast("Error", error.message, "error");
+            console.log(error)
+
         } finally {
             setIsCommenting(false);
         }

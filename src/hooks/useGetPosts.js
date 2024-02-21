@@ -1,28 +1,25 @@
 import React  from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchPosts } from '../store/postSlice';
+import { db } from '@/firebase/firebase'; // Firebase 연결 설정
+import { setPosts } from '@/store/post.slice';
 
-const useFetchPosts = () => {
+
+const useGetPosts = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const loadPosts = async () => {
-      try {
-        dispatch(fetchPosts()); // 게시글 목록을 가져오는 비동기 액션 호출
-      } catch (error) {
-        console.error('게시글 가져오기 실패:', error);
-      }
-    };
-
-    loadPosts();
+    const unsubscribe = db.collection("posts").onSnapshot((snapshot) => {
+      const posts = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      dispatch(setPosts(posts));
+    });
 
     return () => {
-      // Cleanup 함수
+      unsubscribe(); // cleanup 함수에서 구독을 취소합니다.
     };
   }, [dispatch]);
 
-  return null; // 실제로는 상태를 반환하지 않으므로 null 반환
+  return null; // 실제로는 상태를 반환하지 않으므로 null을 반환합니다.
 };
 
-export default useFetchPosts;
+export default useGetPosts;

@@ -23,7 +23,7 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            state.id = action.payload.uid; 
+            state.uid = action.payload.uid; 
             state.email = action.payload.email;
             state.token = action.payload.token;
             state.username = action.payload.username; 
@@ -38,7 +38,7 @@ export const userSlice = createSlice({
             localStorage.setItem('user', JSON.stringify(state));
         },
         removeUser: (state) => {
-            state.id = ""; 
+            state.uid = ""; 
             state.email = ""; 
             state.token = ""; 
             state.username = ""; 

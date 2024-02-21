@@ -26,9 +26,7 @@ const UseGetUsers = () => {
                 const usersRef = collection(db, "users"); // "users" 컬렉션의 참조
                 const q = query(
                     usersRef,
-                    where("uid", "not-in", [authUser.uid, ...authUser.following]), // 현재 사용자와 팔로우 중인 사용자는 제외
                     orderBy("uid"), // uid를 기준으로 정렬
-                    limit(10) // 최대 10명의 추천 사용자만 가져오기
                 );
 
                 const querySnapshot = await getDocs(q); // 쿼리 결과 가져오기

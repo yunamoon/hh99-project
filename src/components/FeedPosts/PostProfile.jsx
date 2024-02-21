@@ -2,15 +2,22 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import useFollower from "@/hooks/useFollower.js";
 import { timeAgo } from "@/utils/timeAgo";
+import { useSelector } from 'react-redux';
 
 const PostProfile = ({ post, creatorProfile }) => {
+	const authUser = useSelector(state => state.user);
 	const { handleFollowUser, isFollowing, isUpdating } = useFollower(post.createdBy);
+
 	return (
 		<div className="flex justify-between items-center w-full my-2">
 			<div className="flex items-center space-x-2">
 				{creatorProfile ? (
 					<Link to={`/${creatorProfile.username}`}>
-						<img src={creatorProfile.profilePicURL} alt='user profile pic' className="w-8 h-8 rounded-full" />
+						{creatorProfile.profilePicURL? 
+						<img src={creatorProfile.profilePicURL} alt='user profile pic' className="w-10 h-10 rounded-full" />
+						:<img src='./user-solid.svg' alt="profile" className="w-10 h-10 rounded-full border border-gray-300 p-1" />
+						}
+						
 					</Link>
 				) : (
 					<div className="animate-pulse w-8 h-8 rounded-full bg-gray-200"></div>
@@ -32,7 +39,9 @@ const PostProfile = ({ post, creatorProfile }) => {
 					onClick={handleFollowUser}
 					disabled={isUpdating}
 				>
-					{isFollowing ? "Unfollow" : "Follow"}
+					
+					{authUser.uid !== post.createdBy ?  
+					(isFollowing ? "Unfollow" : "Follow") : <i className="fa fa-check"></i>}
 				</button>
 			</div>
 		</div>

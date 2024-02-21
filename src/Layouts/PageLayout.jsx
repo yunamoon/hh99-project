@@ -14,9 +14,9 @@ const Layout = ({ children }) => {
       const canRenderSidebar = pathname !== "/auth" && user;
 
   return (
-    <div className="flex">
+    <div className="flex bg-gray-100 h-full">
       {canRenderSidebar ?   <Sidebar /> : null}
-      <div className="flex-1 bg-gray-100 h-screen">
+      <div className="flex-1">
       {children}
     </div>
     </div>

@@ -39,8 +39,8 @@ function CreatePost() {
 
 
   return (
-    <div className="max-w-lg mx-auto bg-gray-100 shadow-md rounded-md p-8 text-black">
-    <h2 className="text-xl font-bold mb-4 font-light">Create Post</h2>
+    <div className="text-black w-full bg-white rounded-lg p-10 shadow-md m-10">
+    <h2 className="text-xl font-bold mb-4 text-sm">Create Post</h2>
     <form onSubmit={handleSubmit} className="space-y-4">
       {previewImage && (
         <img src={previewImage} alt="이미지 미리보기" className="max-w-full mb-4" />
@@ -63,7 +63,7 @@ function CreatePost() {
         />
       </label>
       <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 w-full block">
-          게시
+          Post
         </button>
     </form>
   </div>

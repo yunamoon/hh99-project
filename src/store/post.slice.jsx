@@ -1,14 +1,5 @@
 import { createSlice} from "@reduxjs/toolkit";
-import { db } from '@/firebase/firebase'; // Firebase 연결 설정
 
-export const subscribeToPosts = () => async (dispatch) => {
-    const unsubscribe = db.collection("posts").onSnapshot((snapshot) => {
-    const posts = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-    dispatch(setPosts(posts));
-  });
-
-  return unsubscribe; // 구독을 정리할 때 사용할 함수를 반환합니다.
-};
 
 // 초기 상태 정의
 const initialState = {

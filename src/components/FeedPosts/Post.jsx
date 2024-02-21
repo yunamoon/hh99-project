@@ -8,13 +8,15 @@ const Post = ({ post }) => {
 	const { userProfile } = useGetUserProfileById(post.createdBy);
 
 	return (
-		<>
-			<PostProfile post={post} creatorProfile={userProfile} />
+
+		
 			<div className="my-2 p-4 border-2 border-gray-200 rounded-md">
+			<PostProfile post={post} creatorProfile={userProfile} />
 				<img src={post.img} alt={"FEED POST IMG"} className="w-full" />
+				<PostContents post={post} creatorProfile={userProfile} />
 			</div>
-			<PostContents post={post} creatorProfile={userProfile} />
-		</>
+			
+
 	);
 };
 

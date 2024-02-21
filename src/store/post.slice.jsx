@@ -1,16 +1,6 @@
 import { createSlice} from "@reduxjs/toolkit";
 import { db } from '@/firebase/firebase'; // Firebase 연결 설정
 
-// // Firebase에서 게시글 목록을 가져오는 비동기 액션 생성자
-// export const fetchPosts = createAsyncThunk("post/fetchPosts", async () => {
-//   // Firebase에서 게시글 목록을 가져오는 비동기 작업
-//   const querySnapshot = await db.collection("posts").get(); // Firestore에서 게시글 컬렉션을 가져옴
-//   const posts = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })); // 각 문서를 객체로 변환하여 배열로 저장
-//   console.log(posts);
-//   return posts; // 가져온 게시글 목록 반환
-// });
-
-
 export const subscribeToPosts = () => async (dispatch) => {
     const unsubscribe = db.collection("posts").onSnapshot((snapshot) => {
     const posts = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));

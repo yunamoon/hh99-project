@@ -1,37 +1,45 @@
-import { useState } from "react";
-import { useSelector } from 'react-redux'; // 수정된 부분
+import { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
 
-const useLike = ( {post}) => {
-
-    const [isUpdating, setIsUpdating] = useState(false);
+const useLike = (post) => {
     const authUser = useSelector((state) => state.user);
-    const [likes, setLikes] = useState(post);
-    const [isLiked, setIsLiked] = useState(post);
 
-    const handleLikePost = async () => {
+    const initialLikes = post.likes || []; 
+    const [isUpdating, setIsUpdating] = useState(false);
+    const [likes, setLikes] = useState(initialLikes.length);
+	const [isLiked, setIsLiked] = useState(initialLikes.includes(authUser?.uid));
+
+    useEffect(() => {
+        console.log("likes:", likes);
+        console.log("isLiked:", isLiked);
+    }, [likes, isLiked]);
+
+    const handleLike = async () => {
         if (isUpdating) return;
         if (!authUser) return;
+       
         setIsUpdating(true);
 
         try {
             const postRef = doc(db, "posts", post.id);
+            console.log(authUser.uid)
             await updateDoc(postRef, {
                 likes: isLiked ? arrayRemove(authUser.uid) : arrayUnion(authUser.uid),
             });
 
-            // 함수형 업데이트를 사용하여 이전 상태를 기반으로 likes 상태를 업데이트
-            setLikes(prevLikes => isLiked ? prevLikes - 1 : prevLikes + 1);
             setIsLiked(!isLiked);
+			isLiked ? setLikes(likes - 1) : setLikes(likes + 1);
+
         } catch (error) {
-            // 에러 처리
+            console.log(error);
         } finally {
             setIsUpdating(false);
         }
     };
 
-    return { isLiked, likes, handleLikePost, isUpdating };
+    return { isLiked, likes, handleLike, isUpdating };
 };
 
 export default useLike;

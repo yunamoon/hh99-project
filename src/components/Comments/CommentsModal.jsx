@@ -3,6 +3,7 @@ import Comment from "@/components/Comments/Comment.jsx";
 import usePostComment from "@/hooks/useCreateComment.js";
 
 const CommentsModal = ({ isOpen, onClose, post }) => {
+   
     const { handlePostComment, isCommenting } = usePostComment();
     const commentRef = useRef(null);
     const commentsContainerRef = useRef(null);
@@ -19,7 +20,7 @@ const CommentsModal = ({ isOpen, onClose, post }) => {
                 commentsContainerRef.current?.scrollTo(0, commentsContainerRef.current.scrollHeight);
             }, 100);
         }
-    }, [isOpen, post.comments.length]);
+    }, [isOpen]);
 
     if (!isOpen) return null;
 
@@ -30,9 +31,11 @@ const CommentsModal = ({ isOpen, onClose, post }) => {
                     <h3 className="text-lg leading-6 font-medium text-gray-900">Comments</h3>
                     <div className="mt-2">
                         <div className="flex flex-col max-h-60 overflow-y-auto" ref={commentsContainerRef}>
-                            {post.comments.map((comment, idx) => (
+
+                        {post.comments && post.comments.map((comment, idx) => (
                                 <Comment key={idx} comment={comment} />
                             ))}
+                    
                         </div>
                         <form onSubmit={handleSubmitComment} className="mt-4">
                             <input 

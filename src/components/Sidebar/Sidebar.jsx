@@ -12,12 +12,13 @@ const Sidebar = () => {
         <i className="fas fa-home mr-3"></i>
           <span>Home</span>
         </li>
-      </Link>
+      </Link >
+      <Link to='/users' >
         <li className="p-4 hover:bg-neutral-700 hover:rounded cursor-pointer font-light">
         <i className="fas fa-search mr-3"></i>
           <span>Search User</span>
         </li>
-        
+        </Link >
         <Link to='/create' >
         <li className="p-4 hover:bg-neutral-700  hover:rounded cursor-pointer font-light">
         <i className="fas fa-plus-circle mr-3"></i>

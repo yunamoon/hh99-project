@@ -3,7 +3,7 @@ import FeedPosts from "@/components/FeedPosts/FeedPosts";
 import UsersList from "@/components/UsersList/UsersList";
 import CreatePost from '@/components/FeedPosts/CreatePost';
 import { useLocation } from "react-router-dom";
-
+import { useAuthState } from "react-firebase-hooks/auth";
 const HomePage = () => {
     const { pathname } = useLocation();
     const feedPosts = pathname == "/";

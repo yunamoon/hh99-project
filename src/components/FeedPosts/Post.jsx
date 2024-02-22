@@ -5,15 +5,15 @@ import PostContents from '@/components/FeedPosts/PostContents';
 
 const Post = ({ post }) => {
 
-	const { userProfile } = useGetUserProfileById(post.createdBy);
+	const { profile } = useGetUserProfileById(post.createdBy);
 
 	return (
 
 		
 			<div className="my-10 p-7 w-full bg-white rounded-lg p-4  shadow-md">
-			<PostProfile post={post} creatorProfile={userProfile} />
+			<PostProfile post={post} creatorProfile={profile} />
 				<img src={post.img} alt={"FEED POST IMG"} className="w-full" />
-				<PostContents post={post} creatorProfile={userProfile} />
+				<PostContents post={post} creatorProfile={profile} />
 			</div>
 			
 

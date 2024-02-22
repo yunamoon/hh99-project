@@ -3,14 +3,13 @@ import { useSelector } from "react-redux"; // 수정된 부분
 import { timeAgo } from "@/utils/timeAgo"; // timeAgo 유틸리티 가져오기
 import CommentsModal from "@/components/Comments/CommentsModal.jsx"; // 댓글 모달 컴포넌트 가져오기
 import useLike from "@/hooks/useLike"; // 좋아요 훅 가져오기
-import useCreateComment from "@/hooks/useCreateComment";
 import Comment from "@/components/Comments/Comment.jsx";
-
+import usePostComment from "../../hooks/usePostComment";
 
 const PostContents = ({ post, creatorProfile, isProfilePage }) => {
   const authUser = useSelector((state) => state.user); // 인증된 사용자 가져오기
 
-  const { isCommenting, handlePostComment } = useCreateComment(); // 댓글 작성 훅 사용
+  const { isCommenting, handlePostComment } = usePostComment(); // 댓글 작성 훅 사용
   const [comment, setComment] = useState(""); // 댓글 상태 관리
   
   const { handleLike, isLiked, likes } = useLike(post); // 포스트 좋아요 관련 훅 사용

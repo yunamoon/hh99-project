@@ -12,13 +12,11 @@ const useGetUserProfileById = (userId) => {
 
 	useEffect(() => {
 		const getUserProfile = async () => {
-			console.log('데이터 가지러 출발')
 			setIsLoading(true);
 			setUserProfile(null);
 			try {
 				const userRef = await getDoc(doc(db, "users", userId));
 				if (userRef.exists()) {
-					console.log("저장 전" + userRef.data())
 					setProfile(userRef.data());
 					dispatch(setUserProfile(userRef.data()))
 				}

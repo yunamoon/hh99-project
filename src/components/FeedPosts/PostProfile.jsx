@@ -12,7 +12,7 @@ const PostProfile = ({ post, creatorProfile }) => {
 		<div className="flex justify-between items-center w-full my-2">
 			<div className="flex items-center space-x-2">
 				{creatorProfile ? (
-					<Link to={`/${creatorProfile.username}`}>
+					<Link to={`/${creatorProfile.email}`}>
 						{creatorProfile.profilePicURL? 
 						<img src={creatorProfile.profilePicURL} alt='user profile pic' className="w-10 h-10 rounded-full" />
 						:<img src='./user-solid.svg' alt="profile" className="w-10 h-10 rounded-full border border-gray-300 p-1" />
@@ -25,7 +25,7 @@ const PostProfile = ({ post, creatorProfile }) => {
 
 				<div className="flex flex-col text-xs font-bold space-y-1">
 					{creatorProfile ? (
-						<Link to={`/${creatorProfile.username}`}>{creatorProfile.username}</Link>
+						<Link to={`/${creatorProfile.email}`}>{creatorProfile.username}</Link>
 					) : (
 						<div className="animate-pulse w-20 h-4 bg-gray-200"></div>
 					)}

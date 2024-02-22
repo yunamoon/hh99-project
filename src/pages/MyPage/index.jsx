@@ -8,29 +8,39 @@ import MyPageTabs from "../../components/MyPage/MyPageTabs";
 import { useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from '@/firebase/firebase';
+import UserNotFound from '@/components/MyPage/UserNotFound';
+import useGetUserProfileByEmail from '@/hooks/useGetUserProfileByEmail';
 
 const MyPage = () => {
-	const { username } = useParams();
-	const isLoading = useAuthState(auth); // Assuming isLoading is set properly in your hook
-	const userProfile = useSelector((state)=> state.Profile);  // Assuming userProfile is set properly in your hook
-
+	const { email } = useParams();
+	const isLoading = useAuthState(auth); 
+	const { profile } = useGetUserProfileByEmail(email);
+	console.log("이메일" + email, profile);
 	useEffect(() => {
-		// You can fetch user profile data here using username
-	}, [username]);
+	}, [email]);
 
-	const userNotFound = !isLoading && !userProfile;
+	const userNotFound = !isLoading && !profile;
+	if (userNotFound) return <UserNotFound />;
 
 	return (
-		<div className="container mx-auto py-5">
-			<div className="flex flex-col py-10 px-4 md:px-10">
-				{isLoading && userProfile && <MyPageHeader />}
-				{!isLoading && <MyPageHeaderSkeleton />}
-			</div>
-			<div className="flex px-2 sm:px-4 max-w-full mx-auto border-t border-white-300 flex-col">
-				<MyPageTabs />??
-				<MyPageFeedPosts />
-			</div>
+
+
+		<div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
+		<div className="container m-10 py-5 bg-white col-span-2 rounded-lg p-10 shadow-md">
+		<div className="flex flex-col py-10 px-4 md:px-10">
+			{isLoading && profile && <MyPageHeader email={email} />}
+			{!isLoading && <MyPageHeaderSkeleton />}
 		</div>
+		<div className="flex px-2 sm:px-4 max-w-full mx-auto border-t border-white-300 flex-col">
+			<MyPageTabs />
+			<MyPageFeedPosts />
+		</div>
+	</div>
+	</div>
+
+
+		
+	
 	);
 };
 

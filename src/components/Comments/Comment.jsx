@@ -10,7 +10,7 @@ const Comment = ({ comment }) => {
     if (isLoading) return <CommentSkeleton />;
     return (
         <div className="flex gap-4">
-            <Link to={`/${profile.username}`}>
+            <Link to={`/${profile.email}`}>
                 {profile.profilePicURL? 
                 <img src={profile.profilePicURL} alt="profile" className="w-8 h-8 rounded-full border border-gray-300 p-1" /> :
                 <img src='./user-solid.svg' alt="profile" className="w-8 h-8 rounded-full border border-gray-300 p-1" />
@@ -19,7 +19,7 @@ const Comment = ({ comment }) => {
             </Link>
             <div className="flex flex-col justify-items-start">
                 <div className="flex gap-2 items-center">
-                    <Link to={`/${profile.username}`}>
+                    <Link to={`/${profile.email}`}>
                         <p className="font-bold text-sm">
                             {profile.username}
                         </p>

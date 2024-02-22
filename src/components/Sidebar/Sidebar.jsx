@@ -1,8 +1,10 @@
 import React from "react";
 import SidebarLink from "./SidebarLink";
 import SidebarLogout from "./SidebarLogout";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
+  const authUser = useSelector((state)=> state.user);
 
   return (
     <div className="bg-black text-white w-60 h-screen flex flex-col p-5">
@@ -11,7 +13,7 @@ const Sidebar = () => {
       <SidebarLink to='/auth' name='Home' icon='fas fa-home mr-3'/>
       <SidebarLink to='/users' name='Search User' icon='fas fa-search mr-3'/>
       <SidebarLink to='/create' name='Create' icon='fas fa-plus-circle mr-3'/>
-      <SidebarLink to='/mypage' name='My Page' icon='fas fa-user mr-3'/>
+      <SidebarLink to={`/${authUser.email}`} name='My Page' icon='fas fa-user mr-3'/>
       </ul>
       <SidebarLogout/>
     </div>

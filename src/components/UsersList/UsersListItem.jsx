@@ -7,12 +7,11 @@ import { setUser } from '@/store/user.sliec.jsx';
 const UserListItem = ({ user }) => {
     const authUser = useSelector(state => state.user);
     const { isFollowing, isUpdating, handleFollowUser } = useFollower(user.uid);
-    const dispatch = useDispatch();
     
     return (
         <div className="flex justify-between items-center w-full bg-white rounded-lg p-4 shadow-md m-10">
         <div className="flex items-center space-x-2 ">
-            <Link to={`/${user.username}`}>
+            <Link to={`/${user.email}`}>
                 {user.profilePicURL ? (
                     <img src={user.profilePicURL} alt='p' className="w-10 h-10 rounded-full" />
                 ) : (
@@ -20,7 +19,7 @@ const UserListItem = ({ user }) => {
                 )}
             </Link>
             <div className="flex flex-col">
-                <Link to={`/${user.username}`}>
+                <Link to={`/${user.email}`}>
                     <p className="text-sm font-semibold">{user.username}</p>
                 </Link>
                 <p className="text-xs text-gray-500">{user.followers.length} followers</p>

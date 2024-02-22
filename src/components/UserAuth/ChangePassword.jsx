@@ -1,88 +1,35 @@
 import React, { useState } from 'react';
-import {auth} from '@/firebase'; 
-import styles from '@/components/user/user.module.css'; 
-import { EmailAuthProvider } from 'firebase/auth';
+import useUpdatePassword from '@/hooks/useUpdatePassword';
+import EditProfileItem from '../EditProfile/EditProfileItem';
 
-const ChangePassword = ({ open, onClose }) => {
+const ChangePassword = ({onClose}) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState(null);
+  const { handleChangePassword, error ,success} = useUpdatePassword();
 
-  const handleChangePassword = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (newPassword !== confirmPassword) {
-      setError('새로운 비밀번호가 일치하지 않습니다.');
-      return;
-    }
-
-    try {
-      const user = auth.currentUser;
-      const credential = EmailAuthProvider.credential(
-        user.email,
-        currentPassword
-      );
-
-      await user.reauthenticateWithCredential(credential);
-      await user.updatePassword(newPassword);
-
-      setError(null);
-      setCurrentPassword('');
-      setNewPassword('');
-      setConfirmPassword('');
-
-      console.log('비밀번호가 성공적으로 변경되었습니다.');
-      onClose();
-    } catch (error) {
-      setError('현재 비밀번호가 일치하지 않습니다.');
-      console.error('재인증 오류:', error);
-    }
+    handleChangePassword(currentPassword, newPassword, confirmPassword);
   };
 
   return (
-    <div className={`${styles.modal} ${open ? styles.open : ''}`} onClick={onClose}>
-      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-    <form onSubmit={handleChangePassword}>
-     <h1 className={styles.logo}>비밀번호 변경</h1>
-      <div>
-        <label>현재 비밀번호</label>
-        <input
-          className={styles.input}
-          type="password"
-          value={currentPassword}
-          onChange={(e) => setCurrentPassword(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>새로운 비밀번호</label>
-        <input
-          className={styles.input}
-          type="password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>새로운 비밀번호 확인</label>
-        <input
-          className={styles.input}
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-      </div>
-      <button 
-      className={styles.button}
-      type="submit">비밀번호 변경
-      </button>
+
+    <div onClick={(e) => e.stopPropagation()} className='p-6'>
+      <form onSubmit={handleSubmit} className='mt-4 space-y-6'>
+      <h1>Change Password</h1>
+      <EditProfileItem text="currentPassword" onChange={(e) => setCurrentPassword(e.target.value)} />
+      <EditProfileItem text="newPassword" onChange={(e) => setNewPassword(e.target.value)} />
+      <EditProfileItem text="confirmPassword" onChange={(e) => setConfirmPassword(e.target.value)} />
       {error && <p>{error}</p>}
-    </form>
+      <button
+          type="submit"
+          className="w-full flex-1 px-4 py-2 text-sm font-medium text-white bg-blue-400 border border-transparent rounded-md focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 hover:bg-blue-500 focus:outline-none focus:ring-offset-gray-200">
+      Change Password Submit
+      </button>
+      </form>
     </div>
-    </div>
+
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Comment from "@/components/Comments/Comment.jsx";
-import usePostComment from "@/hooks/useCreateComment.js";
+import usePostComment from "@/hooks/usePostComment";
 
 const CommentsModal = ({ isOpen, onClose, post }) => {
    

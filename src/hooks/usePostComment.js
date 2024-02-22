@@ -4,7 +4,7 @@ import { db } from "@/firebase/firebase";
 import { addComment } from '@/store/post.slice'; // 수정된 부분
 import { useSelector } from 'react-redux'; // 수정된 부분
 
-const useCreateComment = () => {
+const usePostComment= () => {
     const [isCommenting, setIsCommenting] = useState(false);
     const authUser = useSelector((state) => state.user); // 수정된 부분
 
@@ -36,4 +36,4 @@ const useCreateComment = () => {
     return { isCommenting, handlePostComment };
 };
 
-export default useCreateComment;
+export default usePostComment;

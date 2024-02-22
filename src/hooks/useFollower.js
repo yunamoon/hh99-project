@@ -9,7 +9,8 @@ const useFollower = (userId) => {
 	const [isFollowing, setIsFollowing] = useState(false); // 현재 사용자가 해당 사용자를 팔로우 중인지 여부를 나타내는 상태
 	const dispatch = useDispatch(); // Redux useDispatch 훅을 사용하여 디스패치 함수를 가져옴
 	const authUser = useSelector((state) => state.user); // Redux useSelector 훅을 사용하여 사용자 정보를 가져옴
-
+	const profileUser = useSelector((state)=> state.Profile);
+	
 	// 사용자가 다른 사용자를 팔로우 또는 언팔로우하는 함수
 	const handleFollowUser = async () => {
 		setIsUpdating(true); // 업데이트 중임을 나타내는 상태를 true로 설정
@@ -39,7 +40,7 @@ const useFollower = (userId) => {
 
 			setIsFollowing((prevIsFollowing) => !prevIsFollowing); // 팔로잉 상태를 토글
 		} catch (error) {
-			showToast("Error", error.message, "error"); // 오류가 발생한 경우 토스트 메시지 표시
+			console.log("Error", error.message, "error"); // 오류가 발생한 경우 토스트 메시지 표시
 		} finally {
 			setIsUpdating(false); // 업데이트 완료 후 상태를 false로 설정
 		}
@@ -51,7 +52,7 @@ const useFollower = (userId) => {
 			const isFollowing = authUser.following.includes(userId); // 해당 사용자가 팔로우되어 있는지 확인
 			setIsFollowing(isFollowing); // 팔로잉 여부 상태 업데이트
 		}
-	}, [authUser, userId]);
+	}, [authUser, userId, setIsFollowing])
 
 	return { isUpdating, isFollowing, handleFollowUser }; // 상태 및 팔로우 관련 함수 반환
 };

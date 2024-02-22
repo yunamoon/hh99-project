@@ -19,7 +19,7 @@ function App() {
         <Route path='/' element={authUser ? <HomePage /> : <Navigate to='/auth' />} />
         <Route path='/create' element={authUser ? <HomePage /> : <Navigate to='/auth' />} />
         <Route path='/users' element={authUser ? <HomePage /> : <Navigate to='/auth' />} />
-				<Route path='/:username' element={<MyPage />} />
+				<Route path='/:email' element={authUser ? <MyPage /> : <Navigate to='/auth' />}/>
       </Routes>
     </PageLayout>
   </BrowserRouter>

@@ -1,26 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { auth } from "@/firebase/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import useGetUserProfileById from '@/hooks/useGetUserProfileById';
-import EditProfile from "@/components/MyPage/EditProfile.jsx";
+import EditProfile from "@/components/EditProfile/EditProfile.jsx";
+import useGetUserProfileByEmail from '@/hooks/useGetUserProfileByEmail';
+import useFollower from '@/hooks/useFollower';
 
-const MyPageHeader = () => {
+
+const MyPageHeader = ({email }) => {
 	const authUser = useSelector((state) => state.user);
-	const { profile } = useGetUserProfileById(authUser.uid);
+	const { profile } = useGetUserProfileByEmail(email);
 	const [isOpen , setIsOpen]  = useState(false);
+	const { isFollowing, isUpdating, handleFollowUser } = useFollower(profile.uid);
 
-
-	useEffect(() => {
-
-	}, []);
-
-	const visitingOwnProfileAndAuth = authUser && authUser.username === profile.username;
-	const visitingAnotherProfileAndAuth = authUser && authUser.username !== profile.username;
-
-	const handleFollowUser = () => {
-		// 팔로우 또는 언팔로우 로직을 구현하세요.
-	};
+	const isLogin = authUser && authUser.email === profile.email ;
+	const isVisiting = authUser && authUser.email  !== profile.email ;
 
 	return (
 		<div className="flex gap-4 py-10 flex-wrap">
@@ -34,7 +26,7 @@ const MyPageHeader = () => {
 			<div className="flex flex-col flex-1 mx-auto items-start mt-4 md:mt-0 pl-4">
 				<div className="flex gap-4 justify-center md:justify-start w-full items-center">
 					<p className="text-sm md:text-lg font-medium">{profile.username}</p>
-					{visitingOwnProfileAndAuth && (
+					{isLogin && (
 						<div className="flex gap-4 items-center justify-center">
 							<button
 								className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-white-800"
@@ -44,26 +36,29 @@ const MyPageHeader = () => {
 							</button>
 						</div>
 					)}
-					{visitingAnotherProfileAndAuth && (
+					{isVisiting && (
 						<div className="flex gap-4 items-center justify-center">
 							<button
 								className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
 								onClick={handleFollowUser}
+								disabled={isUpdating}
 							>
-								{true ? "Unfollow" : "Follow"}
+								{isFollowing ? "Unfollow" : "Follow"}
 							</button>
 						</div>
 					)}
 				</div>
 
 				<div className="flex items-center gap-4 mt-2">
-					{profile.posts && (<p className="text-xs md:text-sm font-normal">{profile.posts.length} Posts</p>) }
-					{profile.followers && (<p className="text-xs md:text-sm font-normal">{profile.followers.length} Followers</p>) }
-					{profile.following && (<p className="text-xs md:text-sm font-normal">{profile.following.length} Following</p>) }
+					{profile?.posts && (<p className="text-xs md:text-sm font-normal">{profile.posts.length} Posts</p>) }
+					{profile?.followers && (<p className="text-xs md:text-sm font-normal">{profile.followers.length} Followers</p>) }
+					{profile?.following && (<p className="text-xs md:text-sm font-normal">{profile.following.length} Following</p>) }
 				</div>
-				<p className="text-sm mt-2">{profile.bio}</p>
+
+				
+				<p className="text-sm mt-2">{profile?.bio}</p>
 			</div>
-			{isOpen && <EditProfile isOpen={isOpen} />}
+			{isOpen && <EditProfile isOpen={isOpen} onClose={() => setIsOpen(false)}/>}
 		</div>
 	);
 };

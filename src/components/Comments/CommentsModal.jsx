@@ -41,7 +41,7 @@ const CommentsModal = ({ isOpen, onClose, post }) => {
                             <input 
                                 type="text" 
                                 placeholder="Comment" 
-                                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                className="border-b border-gray-300 focus:outline-none w-full px-1 py-2"
                                 ref={commentRef}
                             />
                             <div className="mt-4 flex justify-end">

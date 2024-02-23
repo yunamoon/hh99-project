@@ -4,7 +4,7 @@ import CommentSkeleton from "@/components/Comments/CommentSkeleton.jsx";
 import useDeleteComment from "@/hooks/useDeleteComment";
 import { Link } from "react-router-dom";
 import { timeAgo } from "@/utils/timeAgo";
-import { FaTrashAlt, FaEdit } from 'react-icons/fa'; // 수정 버튼 추가
+import { FaTrashAlt, FaEdit } from 'react-icons/fa'; 
 import { useSelector } from "react-redux";
 import useUpdateComment from '@/hooks/useUpdateComment';
 
@@ -12,8 +12,8 @@ const Comment = ({ comment }) => {
     const { profile, isLoading } = useGetUserProfileById(comment.createdBy);
     const { isDeleting, handleDeleteComment } = useDeleteComment();
     const authUser = useSelector((state) => state.user);
-    const [isEditing, setIsEditing] = useState(false); // 수정된 부분
-    const [editedComment, setEditedComment] = useState(comment.comment); // 수정된 부분
+    const [isEditing, setIsEditing] = useState(false); 
+    const [editedComment, setEditedComment] = useState(comment.comment); 
     const { updateComment } = useUpdateComment(); 
 
     const onDeleteComment = () => {

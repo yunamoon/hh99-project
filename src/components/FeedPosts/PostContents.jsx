@@ -24,8 +24,9 @@ const PostContents = ({ post, creatorProfile, isProfilePage }) => {
     setComment("")
 };
 
+
   return (
-    <div className="mb-10 mt-auto">
+    <div className="mt-auto">
 
       {/* 좋아요 및 댓글 버튼 */}
       <div className="flex items-center gap-4 pt-0 mb-2 mt-4">

@@ -1,25 +1,59 @@
-import React from 'react';
-import { useSelector } from 'react-redux'; // React Redux에서 useDispatch 및 useSelector 훅을 가져옵니다.
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Post from '@/components/FeedPosts/Post.jsx';
 import useGetPosts from '@/hooks/useGetPosts';
 
 const FeedPosts = () => {
-  const { posts } = useSelector((state) => state.posts); // Redux 스토어에서 게시글, 상태 및 오류를 추출합니다.
+  const { posts } = useSelector((state) => state.posts);
   useGetPosts();
-  const sortedPosts = [...posts].sort((a, b) => b.createdAt - a.createdAt);
+  const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [pageSize] = useState(5); 
+  const [sortedPosts, setSortedPosts] = useState([]);
+
+  useEffect(() => {
+    setSortedPosts([...posts].sort((a, b) => b.createdAt - a.createdAt));
+  }, [posts]);
+
+  const loadMorePosts = () => {
+    setIsLoading(true);
+    setPage(page + 1);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+      if (scrollTop + clientHeight >= scrollHeight - 20 && !isLoading) {
+        loadMorePosts();
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (isLoading) {
+      // 새로운 페이지의 데이터를 가져오는 비동기 작업을 수행합니다.
+      // 비동기 작업이 완료된 후에 setIsLoading(false)를 호출하여 로딩 상태를 해제합니다.
+      // 이후 가져온 데이터를 sortedPosts에 추가합니다.
+    }
+  }, [isLoading]);
+
   return (
     <div className="m-10">
-        <ul>
-        {!sortedPosts .length == 0? 
-          <>{sortedPosts.map((post) => (
-            <Post key={post.id} post={post} />
-          ))}</>
-          :<h1 className="py-10 text-center text-xl font-bold text-gray-600 mt-8">
-          등록된 post가 없습니다.
-          <span role="img" aria-label="angry" className="text-red-500 text-2xl ml-2">😡</span>
-        </h1>} 
-        </ul>
-
+      <ul>
+        {sortedPosts.slice(0, page * pageSize).map((post) => (
+          <Post key={post.id} post={post} />
+        ))}
+      </ul>
+      {isLoading && (
+        <div className="flex justify-center items-center mt-4">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-nomal py-2 px-4 rounded">
+            Loading...
+          </button>
+        </div>
+      )}
     </div>
   );
 };

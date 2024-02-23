@@ -12,8 +12,6 @@ const useLike = (post) => {
 	const [isLiked, setIsLiked] = useState(initialLikes.includes(authUser?.uid));
 
     useEffect(() => {
-        console.log("likes:", likes);
-        console.log("isLiked:", isLiked);
     }, [likes, isLiked]);
 
     const handleLike = async () => {

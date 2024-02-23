@@ -15,7 +15,7 @@ const PostProfile = ({ post, creatorProfile }) => {
 					<Link to={`/${creatorProfile.email}`}>
 						{creatorProfile.profilePicURL? 
 						<img src={creatorProfile.profilePicURL} alt='user profile pic' className="w-10 h-10 rounded-full" />
-						:<img src='src/assets/user-solid.svg' alt="profile" className="w-10 h-10 rounded-full border border-gray-300 p-1" />
+						:<img src='https://firebasestorage.googleapis.com/v0/b/hh99-ac7ee.appspot.com/o/default%2Fuser-solid.svg?alt=media&token=4a5732d4-1aea-4bf5-8b21-53fbf21acf68' alt="profile" className="w-10 h-10 rounded-full border border-gray-300 p-1" />
 						}
 						
 					</Link>

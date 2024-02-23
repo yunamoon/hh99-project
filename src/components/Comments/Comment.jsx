@@ -41,7 +41,7 @@ const Comment = ({ comment }) => {
                     <Link to={`/${profile.email}`}>
                         {profile.profilePicURL? 
                         <img src={profile.profilePicURL} alt="profile" className="w-8 h-8 rounded-full border border-gray-300 p-1" /> :
-                        <img src='./profile.png' alt="profile" className="w-8 h-8 rounded-full border border-gray-300 p-1" />
+                        <img src='src/assets/user-solid.svg' alt="profile" className="w-8 h-8 rounded-full border border-gray-300 p-1" />
                         }
                     </Link>
                     <div className="flex flex-col justify-items-start ml-3 w-full">

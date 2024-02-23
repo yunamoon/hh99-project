@@ -15,7 +15,7 @@ const PostProfile = ({ post, creatorProfile }) => {
 					<Link to={`/${creatorProfile.email}`}>
 						{creatorProfile.profilePicURL? 
 						<img src={creatorProfile.profilePicURL} alt='user profile pic' className="w-10 h-10 rounded-full" />
-						:<img src='./profile.png' alt="profile" className="w-10 h-10 rounded-full border border-gray-300 p-1" />
+						:<img src='src/assets/user-solid.svg' alt="profile" className="w-10 h-10 rounded-full border border-gray-300 p-1" />
 						}
 						
 					</Link>

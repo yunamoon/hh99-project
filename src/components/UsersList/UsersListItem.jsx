@@ -15,7 +15,7 @@ const UserListItem = ({ user }) => {
                 {user.profilePicURL ? (
                     <img src={user.profilePicURL} alt='p' className="w-10 h-10 rounded-full" />
                 ) : (
-                    <img src='./user-solid.svg' alt="profile" className="w-10 h-10 rounded-full border border-gray-300 p-1" />
+                    <img src='src/assets/user-solid.svg' alt="profile" className="w-10 h-10 rounded-full border border-gray-300 p-1" />
                 )}
             </Link>
             <div className="flex flex-col">

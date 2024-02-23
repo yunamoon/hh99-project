@@ -19,7 +19,7 @@ const MyPageHeader = ({email }) => {
 			<div className="rounded-full overflow-hidden bg-gray-200">
 			{profile.profilePicURL ? 
                 <img src={profile.profilePicURL} alt='As a programmer logo' className="w-24 h-24 object-cover" />:
-                <img src='./user-solid.svg' alt="profile" className="w-24 h-24 rounded-full border border-gray-300 p-1" />
+                <img src='src/assets/user-solid.svg' alt="profile" className="w-24 h-24 rounded-full border border-gray-300 p-1" />
                 }		
 			</div>
 

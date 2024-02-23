@@ -6,12 +6,12 @@ import useGetPosts from '@/hooks/useGetPosts';
 const FeedPosts = () => {
   const { posts } = useSelector((state) => state.posts); // Redux 스토어에서 게시글, 상태 및 오류를 추출합니다.
   useGetPosts();
-
+  const sortedPosts = [...posts].sort((a, b) => b.createdAt - a.createdAt);
   return (
     <div className="m-10">
         <ul>
-        {!posts.length == 0? 
-          <>{posts.map((post) => (
+        {!sortedPosts .length == 0? 
+          <>{sortedPosts.map((post) => (
             <Post key={post.id} post={post} />
           ))}</>
           :<h1 className="py-10 text-center text-xl font-bold text-gray-600 mt-8">

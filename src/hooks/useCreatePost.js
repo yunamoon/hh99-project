@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {auth, db, storage} from '@/firebase/firebase';
+import { generateRandomString } from '@/utils/imgName';
 
 
 const useCreatePost = () => {
@@ -12,7 +13,8 @@ const useCreatePost = () => {
 
     try {
         const userId = auth.currentUser.uid;
-        const storageRef = storage.ref(`images/${userId}/${image.name}`);
+        const imageName = generateRandomString(10); // 예시: 10자리 랜덤 문자열
+        const storageRef = storage.ref(`images/${userId}/${imageName}`);
         await storageRef.put(image);
         const imageUrl = await storageRef.getDownloadURL();
   

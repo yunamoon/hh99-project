@@ -15,6 +15,7 @@ const MyPage = () => {
 	const { email } = useParams();
 	const isLoading = useAuthState(auth); 
 	const { profile } = useGetUserProfileByEmail(email);
+
 	useEffect(() => {
 	}, [email]);
 
@@ -25,14 +26,14 @@ const MyPage = () => {
 
 
 		<div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
-		<div className="container m-10 py-5 bg-white col-span-2 rounded-lg p-10 shadow-md">
+		<div className="container m-10 bg-white col-span-2 rounded-lg p-5 shadow-md">
 		<div className="flex flex-col py-10 px-4 md:px-10">
 			{isLoading && profile && <MyPageHeader email={email} />}
 			{!isLoading && <MyPageHeaderSkeleton />}
 		</div>
 		<div className="flex px-2 sm:px-4 max-w-full mx-auto border-t border-white-300 flex-col">
 			<MyPageTabs />
-			<MyPageFeedPosts />
+			<MyPageFeedPosts uid={profile.uid}/>
 		</div>
 	</div>
 	</div>

@@ -1,46 +1,45 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
 import { setPosts } from '@/store/post.slice';
-import { useSelector } from 'react-redux'; 
+import { useDispatch } from "react-redux";
 
-const useGetUserPosts = () => {
-	const [isLoading, setIsLoading] = useState(true);
-	const { userProfile }  = useSelector((state) => state.Profile);
-	const { posts } = useSelector((state) => state.posts);
+const useGetUserPosts = (uid) => {
+    const [isLoading, setIsLoading] = useState(true);
+    const dispatch = useDispatch();
 
-	useEffect(() => {
-		const getPosts = async () => {
+    useEffect(() => {
+        const fetchUserPosts = async () => {
+            if (!uid) {
+                setIsLoading(false);
+                return;
+            }
 
-			if (!userProfile) {
-				setIsLoading(false); // userProfile이 없는 경우 로딩 상태를 변경합니다.
-				return;
-			}
-			setIsLoading(true);
-			setPosts([]);
+            try {
+                const q = query(collection(db, "posts"), where("createdBy", "==", uid));
+                const unsubscribe = onSnapshot(q, (snapshot) => {
+                    const posts = [];
+                    snapshot.forEach((doc) => {
+                        posts.push({ ...doc.data(), id: doc.id });
+                    });
+                    posts.sort((a, b) => b.createdAt - a.createdAt);
+                    dispatch(setPosts(posts));
+                    setIsLoading(false);
+                });
 
-			try {
-				const q = query(collection(db, "posts"), where("createdBy", "==", userProfile.uid));
-				const querySnapshot = await getDocs(q);
+                return () => {
+                    unsubscribe();
+                };
+            } catch (error) {
+                console.error("Error fetching user posts:", error);
+                setIsLoading(false);
+            }
+        };
 
-				const posts = [];
-				querySnapshot.forEach((doc) => {
-					posts.push({ ...doc.data(), id: doc.id });
-				});
+        fetchUserPosts();
+    }, [uid, dispatch]);
 
-				posts.sort((a, b) => b.createdAt - a.createdAt);
-				setPosts(posts);
-			} catch (error) {
-				setPosts([]);
-			} finally {
-				setIsLoading(false);
-			}
-		};
-
-		getPosts();
-	}, [setPosts, userProfile]);
-
-	return { isLoading, posts };
+    return { isLoading };
 };
 
 export default useGetUserPosts;

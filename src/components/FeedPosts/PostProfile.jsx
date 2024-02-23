@@ -9,7 +9,7 @@ const PostProfile = ({ post, creatorProfile }) => {
 	const { handleFollowUser, isFollowing, isUpdating } = useFollower(post.createdBy);
 
 	return (
-		<div className="flex justify-between items-center w-full my-2">
+		<div className="flex justify-between items-center w-full mt-3 mb-4">
 			<div className="flex items-center space-x-2">
 				{creatorProfile ? (
 					<Link to={`/${creatorProfile.email}`}>

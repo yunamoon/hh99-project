@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
-import { addComment } from '@/store/post.slice'; // 수정된 부분
-import { useSelector } from 'react-redux'; // 수정된 부분
+import {  useSelector } from 'react-redux'; // 수정된 부분
 
 const usePostComment= () => {
     const [isCommenting, setIsCommenting] = useState(false);
@@ -13,7 +12,11 @@ const usePostComment= () => {
         if (!authUser) return;
         setIsCommenting(true);
      
+        const newCommentRef = doc(db.collection("posts").doc(postId).collection("comments")); // post 내의 comments 컬렉션에 대한 참조
+        const newCommentId = newCommentRef.id;
+
         const newComment = {
+            commentId: newCommentId,
             comment,
             createdAt: Date.now(),
             createdBy: authUser.uid,
@@ -24,7 +27,7 @@ const usePostComment= () => {
             await updateDoc(doc(db, "posts", postId), {
                 comments: arrayUnion(newComment),
             });
-            addComment({ postId, comment: newComment }); // 수정된 부분
+
         } catch (error) {
             console.log(error)
 

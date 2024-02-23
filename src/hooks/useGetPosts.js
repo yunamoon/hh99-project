@@ -15,11 +15,11 @@ const useGetPosts = () => {
     });
 
     return () => {
-      unsubscribe(); // cleanup 함수에서 구독을 취소합니다.
+      unsubscribe(); 
     };
   }, [dispatch]);
 
-  return null; // 실제로는 상태를 반환하지 않으므로 null을 반환합니다.
+  return null; 
 };
 
 export default useGetPosts;

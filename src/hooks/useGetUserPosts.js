@@ -11,7 +11,11 @@ const useGetUserPosts = () => {
 
 	useEffect(() => {
 		const getPosts = async () => {
-			if (!userProfile) return;
+
+			if (!userProfile) {
+				setIsLoading(false); // userProfile이 없는 경우 로딩 상태를 변경합니다.
+				return;
+			}
 			setIsLoading(true);
 			setPosts([]);
 

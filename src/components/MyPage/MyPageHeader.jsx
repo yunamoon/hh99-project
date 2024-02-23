@@ -29,7 +29,7 @@ const MyPageHeader = ({email }) => {
 					{isLogin && (
 						<div className="flex gap-4 items-center justify-center">
 							<button
-								className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-white-800"
+								className="bg-blue-500 text-white px-3 py-1.5 rounded-md hover:bg-white-800"
 								onClick={()=>{setIsOpen(!isOpen)}}
 							>
 								Edit Profile
@@ -39,7 +39,7 @@ const MyPageHeader = ({email }) => {
 					{isVisiting && (
 						<div className="flex gap-4 items-center justify-center">
 							<button
-								className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+								className="bg-blue-500 text-white px-3 py-1.5 rounded-md hover:bg-blue-600"
 								onClick={handleFollowUser}
 								disabled={isUpdating}
 							>

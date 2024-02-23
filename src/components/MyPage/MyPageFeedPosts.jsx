@@ -5,12 +5,12 @@ import NoPostsFound from "./NoPostsFound";
 
 const MyPageFeedPosts = () => {
 	const { isLoading, posts } = useGetUserPosts();
-
 	const noPostsFound = !isLoading && posts.length === 0;
 	if (noPostsFound) return <NoPostsFound />;
 
 	return (
-		<div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-1">
+		<div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-2">
+			
 			{isLoading ? (
 				[...Array(3)].map((_, idx) => (
 					<div key={idx} className="flex flex-col items-start space-y-4">

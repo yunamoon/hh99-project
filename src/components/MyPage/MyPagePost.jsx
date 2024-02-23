@@ -61,7 +61,7 @@ const MyPagePost = ({ post }) => {
                                         {userProfile.profilePicURL? 
                                          <img src={userProfile.profilePicURL} alt="profile" className="w-10 h-10 rounded-full object-cover" />
                                         :
-                                        <img src='src/assets/user-solid.svg' alt="profile" className="w-10 h-10 rounded-full object-cover" />}
+                                        <img src='https://firebasestorage.googleapis.com/v0/b/hh99-ac7ee.appspot.com/o/default%2Fuser-solid.svg?alt=media&token=4a5732d4-1aea-4bf5-8b21-53fbf21acf68' alt="profile" className="w-10 h-10 rounded-full object-cover" />}
                                
                                         <span className="font-bold text-black ml-2">{userProfile.username}</span>
                                     </div>

@@ -15,7 +15,6 @@ const MyPage = () => {
 	const { email } = useParams();
 	const isLoading = useAuthState(auth); 
 	const { profile } = useGetUserProfileByEmail(email);
-	console.log("이메일" + email, profile);
 	useEffect(() => {
 	}, [email]);
 

@@ -24,7 +24,6 @@ const useGetUserProfileByEmail = (email) => {
             setIsLoading(true);
             const profiles = [];
             snapshot.forEach((doc) => {
-                console.log(doc.id, ' => ', doc.data());
                 profiles.push(doc.data());
             });
             setProfile(profiles[0]); // 이메일이 고유하다고 가정하고 첫 번째 문서만 사용

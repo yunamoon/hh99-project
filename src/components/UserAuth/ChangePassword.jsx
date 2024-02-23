@@ -17,7 +17,7 @@ const ChangePassword = ({onClose}) => {
 
     <div onClick={(e) => e.stopPropagation()} className='p-6'>
       <form onSubmit={handleSubmit} className='mt-4 space-y-6'>
-      <h1>Change Password</h1>
+      <h1 className="text-xl font-bold mb-4 text-sm"> Change Password</h1>
       <EditProfileItem text="currentPassword" onChange={(e) => setCurrentPassword(e.target.value)} />
       <EditProfileItem text="newPassword" onChange={(e) => setNewPassword(e.target.value)} />
       <EditProfileItem text="confirmPassword" onChange={(e) => setConfirmPassword(e.target.value)} />

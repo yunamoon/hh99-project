@@ -22,7 +22,7 @@ const EditProfile = ({ isOpen ,onClose  }) => {
     const { isUpdating, editProfile } = useUpdateProfile();
 
 	const [isPasswordOpen , setIsPasswordOpen]  = useState(false);
-    
+
     const handleEditProfile = async () => {
         try {
             await editProfile(inputs, selectedFile);
@@ -69,7 +69,7 @@ const EditProfile = ({ isOpen ,onClose  }) => {
                             </div>
                             <div className="mt-4 space-y-6">
                             <EditProfileItem text='Username' placeholder={authUser.username} value={inputs.username} onChange={(e) => setInputs({ ...inputs, username: e.target.value })}/>
-                            <EditProfileItem text='Username' placeholder={authUser.bio} value={inputs.bio} onChange={(e) => setInputs({ ...inputs, bio: e.target.value })}/>
+                            <EditProfileItem text='bio' placeholder={authUser.bio} value={inputs.bio} onChange={(e) => setInputs({ ...inputs, bio: e.target.value })}/>
                             <EditProfileBtn  onClick={{ onClose, handleEditProfile }} isUpdating={isUpdating}/>
                             </div>
                         </div> ) 

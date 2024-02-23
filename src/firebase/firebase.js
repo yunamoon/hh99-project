@@ -3,8 +3,6 @@ import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import 'firebase/compat/storage'
 import 'firebase/compat/firestore'
-import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth ,updateProfile} from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,

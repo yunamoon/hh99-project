@@ -58,7 +58,11 @@ const MyPagePost = ({ post }) => {
                             <div className="w-1/2 p-6">
                                 <div className="flex justify-between items-center">
                                     <div className="flex items-center">
-                                        <img src={userProfile.profilePicURL} alt="profile" className="w-10 h-10 rounded-full object-cover" />
+                                        {userProfile.profilePicURL? 
+                                         <img src={userProfile.profilePicURL} alt="profile" className="w-10 h-10 rounded-full object-cover" />
+                                        :
+                                        <img src='src/assets/user-solid.svg' alt="profile" className="w-10 h-10 rounded-full object-cover" />}
+                               
                                         <span className="font-bold text-black ml-2">{userProfile.username}</span>
                                     </div>
                                     <div className="flex items-center">

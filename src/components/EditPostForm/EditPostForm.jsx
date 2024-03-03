@@ -7,6 +7,7 @@ const EditPostForm = ({ isOpen, onClose, post }) => {
 
     const { handleUpdatePost, loading, error } = useUpdatePost();
     const authUser = useSelector((state)=> state.user)
+    const [postId , SetPostId] = useState(post.id)
     const [inputs, setInputs] = useState({
         content: post.content,
         image: null,
@@ -54,7 +55,7 @@ const EditPostForm = ({ isOpen, onClose, post }) => {
                                 />
                             </div>
                             <button
-                                onClick={handleUpdatePost}
+                                onClick={() => handleUpdatePost(postId, inputs.content , inputs.image)}
                                 className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
                             >
                                 Update Post

@@ -13,7 +13,6 @@ const useUpdatePost = () => {
     const handleUpdatePost = async (postId, content, image) => {
         setLoading(true);
         setError(null);
-
         try {
             let imgUrl = null;
 

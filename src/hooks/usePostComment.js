@@ -12,7 +12,7 @@ const usePostComment= () => {
         if (!authUser) return;
         setIsCommenting(true);
      
-        const newCommentRef = doc(db.collection("posts").doc(postId).collection("comments")); // post 내의 comments 컬렉션에 대한 참조
+        const newCommentRef = doc(db.collection("posts").doc(postId).collection("comments")).doc(); // post 내의 comments 컬렉션에 대한 참조
         const newCommentId = newCommentRef.id;
 
         const newComment = {

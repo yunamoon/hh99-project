@@ -13,7 +13,7 @@ const useCreatePost = () => {
 
     try {
         const userId = auth.currentUser.uid;
-        const imageName = generateRandomString(10); // 예시: 10자리 랜덤 문자열
+        const imageName = generateRandomString(); // 예시: 10자리 랜덤 문자열
         const storageRef = storage.ref(`images/${userId}/${imageName}`);
         await storageRef.put(image);
         const imageUrl = await storageRef.getDownloadURL();

@@ -25,7 +25,6 @@ What did I do:
 * 댓글, 좋아요 등 유저 간 상호작용이 가능한 서비스 구현
 
 Tech Stack:
-* 댓글, 좋아요 등 유저 간 상호작용이 가능한 서비스 구현
 * JavaScript, React, Redux, styled-components, Tailwind css, Firebase, Jest, Git actions
 
 

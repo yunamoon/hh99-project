@@ -3,26 +3,25 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 20px 0px;
-    background-color: white;
-    font-family: "Roboto", sans-serif;
-    
-}
+    padding: 30px;
+   color: white;
+ }
 
-.header .back {
+.header .open {
     display: flex;
     align-items: center;
     cursor: pointer;
 }
 
-.header .back p {
+.header .open p {
     margin-left: 5px;
     font-size: 14px;
 }
 
+
 .header .nav-list {
     display: flex;
-    gap:100px;
+    gap: 20px;
 }
 
 .header .nav-list li {
@@ -32,7 +31,7 @@
     cursor: pointer;
 }
 .header .nav-list li:hover {
-    font-weight: 400;
+    color: black;
 }
 
 .header .member-count {

@@ -1,7 +1,7 @@
 
 
 <div align="center">
-  <h3 align="center">Commune.</h3>
+  <h3 align="center">HH99</h3>
 
   <p align="center">
     React + Firebase 기반의 커뮤니티 사이트입니다.
@@ -17,7 +17,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Commune은 서로의 포스트를 공유하고 상호 작용할 수 있는 온라인 커뮤니티 플랫폼입니다. 사용자들은 서로의 게시글에 좋아요를 표시하고 댓글을 남기며 친목을 형성할 수 있습니다.
+HH99는 서로의 포스트를 공유하고 상호 작용할 수 있는 온라인 커뮤니티 플랫폼입니다. 사용자들은 서로의 게시글에 좋아요를 표시하고 댓글을 남기며 친목을 형성할 수 있습니다.
 
 What did I do:
 * 이미지를 포함한 포스트 CRUD

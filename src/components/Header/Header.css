@@ -1,0 +1,41 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0px;
+    background-color: white;
+    font-family: "Roboto", sans-serif;
+    
+}
+
+.header .back {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header .back p {
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.header .nav-list {
+    display: flex;
+    gap:100px;
+}
+
+.header .nav-list li {
+    font-size: 18px;
+    font-weight: 300;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+.header .nav-list li:hover {
+    font-weight: 400;
+}
+
+.header .member-count {
+    cursor: pointer;
+    font-size: 14px;
+}

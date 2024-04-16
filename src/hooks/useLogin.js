@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { auth, db } from '@/firebase/firebase'
 import { useDispatch } from 'react-redux';
 import { setUser } from '@/store/user.sliec.jsx';
-
+import { useNavigate } from 'react-router-dom';
 const useLogin = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const useLogin = () => {
           ...userInfo,
           }));
       }
+      navigate('/');
 
     } catch (error) {
       setError(error.message);

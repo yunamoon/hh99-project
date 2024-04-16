@@ -5,7 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/firebase/firebase";
 const Sidebar = () => {
   const [authUser] = useAuthState(auth);
-
+  console.log(authUser)
   return (
     <div className="bg-black text-white w-60 h-screen flex flex-col p-5">
       <img className="p-4 mt-5"  src='' alt='HH99'></img>
@@ -15,7 +15,8 @@ const Sidebar = () => {
       {authUser? <SidebarLink to='/create' name='Create' icon='fas fa-plus-circle mr-3'/> : null }
       {authUser?<SidebarLink to={`/${authUser.email}`} name='My Page' icon='fas fa-user mr-3'/> : null }
       </ul>
-      <SidebarLogout authUser={authUser}/>
+      {authUser?<SidebarLogout login={false}/> : <SidebarLogout login={true}/> }
+      
     </div>
   );
 };

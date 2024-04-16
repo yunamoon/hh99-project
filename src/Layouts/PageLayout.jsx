@@ -6,16 +6,9 @@ import Sidebar from '@/components/Sidebar/Sidebar.jsx';
 
 const Layout = ({ children }) => {
 
-      // 현재 페이지 경로 가져오기
-      const { pathname } = useLocation();
-      // 사용자 인증 상태 및 로딩 상태 가져오기
-      const [user] = useAuthState(auth);
-      // pathname과 사용자 인증 상태 확인
-      const canRenderSidebar = pathname !== "/auth" && user;
-
   return (
     <div className="flex bg-gray-100 h-full">
-      {canRenderSidebar ?   <Sidebar /> : null}
+       <Sidebar /> 
       <div className="flex-1">
       {children}
     </div>

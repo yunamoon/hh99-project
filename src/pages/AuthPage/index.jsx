@@ -4,7 +4,7 @@ import AuthForm from '@/components/UserAuth/AuthForm';
 function AuthPage() {
 	const container = {
 		display: "flex",
-		justifyContent: "center",
+		paddingLeft : "350px",
 		alignItems: "center",
 		height: "100vh",
 		backgroundColor: "black",

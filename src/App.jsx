@@ -1,7 +1,5 @@
 import React from "react";
 import { BrowserRouter , Route, Routes} from "react-router-dom";
-
-// Home , Auth, layout , mypage
 import PageLayout from "@/Layouts/PageLayout.jsx";
 import HomePage from '@/pages/HomePage/index';
 import MyPage from '@/pages/MyPage/index';

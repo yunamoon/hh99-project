@@ -19,22 +19,23 @@
 }
 
 
-.header .nav-list {
+.header a, p {
+    cursor: pointer;
     display: flex;
-    gap: 20px;
+    align-items: center;
+    gap:10px;
 }
 
-.header .nav-list li {
+.header a {
     font-size: 18px;
     font-weight: 300;
     transition: all 0.3s;
     cursor: pointer;
 }
-.header .nav-list li:hover {
+.header .a:hover {
     color: black;
 }
 
-.header .member-count {
-    cursor: pointer;
+.header p {
     font-size: 14px;
 }
